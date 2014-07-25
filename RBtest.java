@@ -1,4 +1,10 @@
-class RBtest
+// This java file is about implementing Red-Black Tree
+// Reference book <Introduction to Algorithm> third Edition
+// Author: Yinjie Huang
+// Date: 07-24-2014
+
+
+class Test
 {
         public static void main(String[] args)
         {
@@ -7,7 +13,7 @@ class RBtest
                 //System.out.println(s.equals("Black")?"Black":"Red");
 
                 RBTree rbt = new RBTree();
-                int[] keys = new int[]{15,6,18,3,7,13,20,2,9,4};
+                int[] keys = new int[]{41,38,31,12,19,8};
 
                 for(int i=0;i<keys.length;i++)
                         rbt.RBinsert(keys[i]);
@@ -19,7 +25,10 @@ class RBtest
                 //rbt.printKey(rbt.search(rbt.getRoot(),111));
 
                 System.out.println("Let's delete:");
-                rbt.delete(60);
+                rbt.delete(8);
+                rbt.delete(12);
+                rbt.delete(19);
+                rbt.delete(31);
 
                 rbt.inorderTreeWalk(rbt.getRoot());
         }
@@ -27,12 +36,13 @@ class RBtest
 
 class RBTree
 {
+        // Construct Red-Black Tree
         private class Node{
                 private int key;
                 private String color;
-                Node left;
-                Node right;
-                Node p;
+                private Node left;
+                private Node right;
+                private Node p;
 
                 public Node(int key, String color, Node left, Node right, Node p)
                 {
@@ -44,14 +54,15 @@ class RBTree
                 }
         }
 
-        private Node Tnill = new Node(-100,"Black",null,null,null);
+        // Create Sentinel Node
+        private Node Tnill = new Node(-100,"BLACK",null,null,null);
 
         private Node root = Tnill;
 
         public void printKey(Node x)
         {
                 if (x == Tnill)
-                        System.out.println("SB, It's empty!!");
+                        System.out.println("It's empty!!");
                 else
                         System.out.println("Key: "+x.key+"("+x.color+"). Left: "+x.left.key+". Right: "+x.right.key+".");
         }
@@ -95,6 +106,7 @@ class RBTree
                 return x;
         }
 
+        // Left Rotate
         private void leftRotate(Node x)
         {
                 Node y = x.right;
@@ -152,6 +164,7 @@ class RBTree
                 RBinsertFix(z);
         }
 
+        // Fix the tree after insertion, complated, please read Ch 13 in the Reference book
         private void RBinsertFix(Node z)
         {
                 while(z.p.color.equals("RED"))
@@ -223,6 +236,7 @@ class RBTree
                         delete(x);
         }
         
+        // Delete a node in the tree
         private void delete(Node z)
         {
                 Node y = z;
@@ -258,9 +272,10 @@ class RBTree
                         RBdeleteFix(x);
         }
 
+        // Fix the Red-Black property, please read Ch 13 from <Introduction to Algorithm>
         private void RBdeleteFix(Node x)
         {
-                while ( x != Tnill && x.color.equals("BLACK"))
+                while (x != root && x.color.equals("BLACK"))
                 {
                         if (x == x.p.left)
                         {

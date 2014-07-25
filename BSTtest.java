@@ -1,12 +1,16 @@
-import java.util.*;
+// This Java file is about implenmenting Binary Search Tree
+// Reference book is <Introduction to ALogirhtm> third edition
+// Author: Yinjie Huang
+// Data: 07-22-2014
 
-class BSTtest
+
+class Test
 {
         static public void main(String[] args)
         {
                 MyBST mbst = new MyBST();
                 int[] keys = new int[]{15,6,18,3,7,13,20,2,9,4};
-
+                // Insert 
                 for(int i=0;i<keys.length;i++)
                 {
                         mbst.insert(keys[i]);
@@ -39,12 +43,14 @@ class BSTtest
                 // Seventh, let's delete something
                 System.out.print("(7) let's delete " + 7 + " :");
                 mbst.delete(7);
+                mbst.inorderTreeWalk(mbst.getRoot());
         }
 }
 
 
 class MyBST
 {
+        // Construct the node
         private Node root = null;
         private class Node{
                 private int key;
@@ -62,14 +68,15 @@ class MyBST
 
         }
 
+        // Print the key value in the node
         public void printKey(Node x)
         {
                 if (x!=null)
                 {
-                        System.out.println(x.key);
+                        System.out.println("Key value: "+x.key+".");
                 }else
                 {
-                        System.out.println("null, sb!!");
+                        System.out.println("Null, Sorry");
                 }
         }
 
@@ -92,6 +99,7 @@ class MyBST
                 }
         }
 
+        // Return the minimum key node
         public Node min(Node x)
         {
                 while(x.left != null)
@@ -141,6 +149,7 @@ class MyBST
         }
 
 
+        // Insert a new node with specified key value
         public void insert(int key)
         {
                 Node y = null;
@@ -187,6 +196,7 @@ class MyBST
                         v.p = u.p;
         }
 
+        // Delete some specified node
         private void delete(Node z)
         {
                 if (z.left == null)
@@ -215,7 +225,7 @@ class MyBST
                 Node z = search(root,key);
                 if (z == null)
                 {
-                        System.out.println("SB, i can not find it");
+                        System.out.println("Soryy, can not find it");
                 }else
                 {
                         delete(z);
