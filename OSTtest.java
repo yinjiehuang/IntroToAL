@@ -1,3 +1,8 @@
+// This java file is about implementing Order-Statistic Tree
+// Reference book <Introduction to Algorithm> Third Edition
+// Author: Yinjie Huang
+// Data: 07-26-2014
+
 class OSTtest
 {
         public static void main(String[] args)
